@@ -14,7 +14,7 @@ def generate_characters(min_length, has_number = True, has_special = True):
     characters = letters
     if has_number:
         # Numbers would be added inside characters variable imported via "string" package (0123456789)
-        characters += numbers≈
+        characters += numbers
     if has_special:
         # Special characters would be added inside characters variable imported via "string" package (!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~)
         characters += special
