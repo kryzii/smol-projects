@@ -1,44 +1,51 @@
-# Mon 20 Apr 8:52
+# Mon 20 Apr, 9;26 pm
 
 import random
 import string
 
 
-def generate_password(min_length, numbers=True, special_characters=True):
-    
+def generate_characters(min_length, has_number = True, has_special = True):
+    # Initialize variable with "string" imported
     letters = string.ascii_letters
-    digits = string.digits
-    specials = string.punctuation
+    numbers = string.digits
+    special = string.punctuation
 
+    # Characters would first contain letters imported via "string" package (abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ)
     characters = letters
-    if numbers: 
-        characters += digits
-        characters += specials
-    
-    pwd = ""
-    meets_criteria = False
-    has_number = False
-    has_special = False
+    if has_number:
+        # Numbers would be added inside characters variable imported via "string" package (0123456789)
+        characters += numbers≈
+    if has_special:
+        # Special characters would be added inside characters variable imported via "string" package (!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~)
+        characters += special
 
-    while not meets_criteria or len(pwd) < min_length:
-        new_char = random.choice(characters)
-        pwd += new_char
+    # Sections to make the randomized password followed the criteria
+    pwd = "" 
+    criteria = False
+    number_added = False
+    special_added = False
 
-        if new_char in digits:
-            has_number = True
-        elif new_char in specials:
-            has_special = True
+    while not criteria or len(pwd) < min_length: # always run for the first time
+        new_characters = random.choice(characters) # added random character by using "random" package
+        pwd += new_characters # keep adding new characters to the "pwd" 
 
-        meets_criteria = True
-        if numbers: 
-            meets_criteria = has_number
-        if special_characters:
-            meets_criteria = meets_criteria and has_special 
+        # Sections to basically verify all criteria is checked 
+        if new_characters in numbers:
+            number_added = True
+        elif new_characters in special:
+            special_added = True
+
+        criteria = True
+        if has_number:
+            criteria = number_added
+        if has_special:
+            criteria = criteria and special_added
 
     return pwd 
 
+# Input from users
 min_length = int(input("Enter minimum length: "))
-has_number = input("Do you want to have numbers? (y/n): ").lower() == "y"
-has_special = input("Do you want to have special characters? (y/n): ").lower() == "y"
-pwd = generate_password(min_length, has_number, has_special)
-print("The generated password is:",pwd)
+has_number = input("Do you want number? (y/n): ").lower() == "y"
+has_special = input("Do you want symbol? (y/n): ").lower() == "y"
+pwd = generate_characters(min_length, has_number, has_special)
+print (pwd)
